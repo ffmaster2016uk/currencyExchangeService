@@ -3,6 +3,7 @@
     namespace App\Services;
 
     use App\Interfaces\CurrencyExchangeableInterface;
+    use Illuminate\Support\Facades\Cache;
 
     class ExchangeService
     {
@@ -13,8 +14,14 @@
             $this->provider = $provider;
         }
 
-        public function getExchangeRates()
+        public function getExchangeRates($baseCurrency = null)
         {
-            return $this->provider->getRates();
+            $baseCurrency = empty($baseCurrency) ? $baseCurrency : env('DEFAULT_BASE_CURRENCY', 'EUR');
+            if (Cache::has($baseCurrency)) {
+                return Cache::get($baseCurrency);
+            }
+            $result = $this->provider->getRates($baseCurrency);
+            Cache::put($baseCurrency, $result, env('DEFAULT_CACHE_TTL', 120));
+            return $result;
         }
     }

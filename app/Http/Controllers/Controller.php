@@ -18,9 +18,9 @@
         }
 
 
-        public function getExchangeRates()
+        public function getExchangeRates($baseCurrency = null)
         {
-            $result = $this->service->getExchangeRates();
+            $result = $this->service->getExchangeRates($baseCurrency);
 
             return response()->json($result);
         }

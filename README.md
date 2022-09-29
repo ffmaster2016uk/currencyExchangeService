@@ -1,24 +1,21 @@
-# Lumen PHP Framework
+## Setup
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
+- Make sure you have compose installed
+- From root of the repo, run:
+```
+composer install
+```
+## Usage
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+- From root of the repo, run:
+```
+php -S localhost:8000 -t public
+```
 
-## Official Documentation
+- Go to localhost:8000 in a browser or send a get request to localhost:8000 from Postman
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+## Notes and thoughts
 
-## Contributing
-
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- I've added configs for default base currency and API keys in the env file, and kept my code flexible enough for a currency type to be passed in, due to lack of experience with Lumen, I couldn't find a way within the framework to define optional parameter in the route definition to behave the way I want it to, with my time, I'm sure I can either find a way within the framework, or a way to extend it, so the optional parameter can be passed it. Alternatively I could have coded the logic to accept URL parameter as well.
+- I've only done a basic automated test to check the request returns a 200 status, it seems Lumen's test library has less functionality compared to Laravel, with more time I would have created better tests
+- A new API service could be changed by creating a new class that implements the CurrencyExchangeableInterface interface and be swapped in at the controller constructor level

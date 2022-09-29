@@ -6,6 +6,6 @@
 
     interface CurrencyExchangeableInterface
     {
-        public function getRates() : OutPutData;
+        public function getRates($baseCurrency) : OutPutData;
     }
 
